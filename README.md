@@ -310,7 +310,7 @@ $0 * $1
 }
 ```
 
-## Question 11
+## Question 11 NEED TO DO PART E
 
 a) Write a function called `intsToStrings` that takes an array of Ints and a closure as parameters and returns an array of Strings. The closure should take an Int and return a String. The function should apply the closure to the ints in the array.
 
@@ -394,7 +394,7 @@ return stringLetterNumber
 print(intsToStrings(theInts, closure: englishWords))
 ```
 
-## Question 12
+## Question 12 NEED TO DO
 
 let myArray = [34,42,42,1,3,4,3,2,49]
 
@@ -413,7 +413,7 @@ let descendingOrder =
 ```
 
 
-## Question 13
+## Question 13 DONE
 
 `let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[245,2,3,5,74]]`
 
@@ -421,8 +421,29 @@ a) Sort `arrayOfArrays` in ascending order by the **3rd element** in each array.
 
 b) Sort `arrayOfArrays` in ascending order by the 3rd element in each array. Don't assume each array will have at least 3 elements. Put all arrays that have less than 3 elements at the end in any order.
 
+Answer:
+```swift
+let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[245,2,3,5,74]]
 
-## Question 14
+//a) Sort `arrayOfArrays` in ascending order by the **3rd element** in each array. You can assume each array will have at least 3 elements.
+
+var arraySortedThirdElement = arrayOfArrays.sorted(by: {$0[2] < $1[2]})
+print(arraySortedThirdElement)
+
+//b) Sort `arrayOfArrays` in ascending order by the 3rd element in each array. Don't assume each array will have at least 3 elements. Put all arrays that have less than 3 elements at the end in any order.
+
+var arraySortedThirdElement2 = arrayOfArrays.sorted(by: {
+if $0.count >= 3 && $1.count >= 3 {
+$0[2] < $1[2]
+} else if $0.count >= 3 {
+return true
+}
+return false
+})
+print(arraySortedThirdElement2)
+```
+
+## Question 14 DONE
 
 ```swift
 let letterValues = [
@@ -463,7 +484,60 @@ b) Sort the string below in ascending order according the dictionary `letterValu
 
 `var codeStringTwo = "znwemnrfewpiqn"`
 
-## Question 15
+Answer:
+```swift
+let letterValues = [
+"a" : 54,
+"b" : 24,
+"c" : 42,
+"d" : 31,
+"e" : 35,
+"f" : 14,
+"g" : 15,
+"h" : 311,
+"i" : 312,
+"j" : 32,
+"k" : 93,
+"l" : 203,
+"m" : 212,
+"n" : 41,
+"o" : 102,
+"p" : 999,
+"q" : 1044,
+"r" : 404,
+"s" : 649,
+"t" : 414,
+"u" : 121,
+"v" : 838,
+"w" : 555,
+"x" : 1001,
+"y" : 123,
+"z" : 432
+]
+
+//a) Sort the string below in descending order according the dictionary `letterValues`:
+
+var codeString = "aldfjaekwjnfaekjnf"
+var codeStringArray = Array(codeString)
+
+var sortedDescending = String(codeStringArray.sorted(by: {(x: Character, y:Character) -> Bool in letterValues
+return x > y
+}))
+
+print(sortedDescending)
+
+//b) Sort the string below in ascending order according the dictionary `letterValues`
+
+var codeStringTwo = "znwemnrfewpiqn"
+var codeStringArrayTwo = Array(codeStringTwo)
+
+var sortedAscending = String(codeStringArrayTwo.sorted(by: {(x: Character, y:Character) -> Bool in letterValues
+return x < y
+}))
+```
+
+
+## Question 15 DONE
 
 ```swift
 let firstAndLastTuples = [("Johann S.", "Bach"),
@@ -483,7 +557,28 @@ Des Prez, Josquin
 ...etc
 ```
 
-## Question 16
+Answer:
+```swift
+let firstAndLastTuples = [("Johann S.", "Bach"),
+("Claudio", "Monteverdi"),
+("Duke", "Ellington"),
+("W. A.", "Mozart"),
+("Nicolai","Rimsky-Korsakov"),
+("Scott","Joplin"),
+("Josquin","Des Prez")]
+
+func sortByLastName(_ arrOfTuples: [(String, String)]) {
+let sortedNames = arrOfTuples.sorted(by: { $0.1 < $1.1 })
+
+for name in sortedNames {
+print("\(name.1), \(name.0)")
+}
+}
+
+sortByLastName(firstAndLastTuples)
+```
+
+## Question 16 DONE
 
 a) Write a function called `myFilter` that takes an array of Doubles and a closure as parameters and returns an array of Doubles. The closure should take a Double and return a Bool. The function should apply the closure to the doubles in the array.
 
@@ -512,4 +607,50 @@ output:
 a. [11.45, 58.65, 66]
 b. [4, 66, 5]
 c. [4, 58.65, 66]
+```
+
+Answer:
+```swift
+//a) Write a function called `myFilter` that takes an array of Doubles and a closure as parameters and returns an array of Doubles. The closure should take a Double and return a Bool. The function should apply the closure to the doubles in the array.
+
+let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, 5.2, 5.0]
+
+func myFilter(_ arrayOfDoubles:[Double], closure: (Double) -> Bool ) -> [Double] {
+var answer = [Double]()
+
+for i in arrayOfDoubles{
+if closure(i) {
+answer.append(i)
+}
+}
+return answer
+}
+
+//b) Define a closure assigned to a constant called `biggerThanTen` that takes a double and returns true if it is greater or equal to 10.0 and pass it to `myFilter`.
+
+let biggerThanTen = { (a: Double) -> Bool in  a >= 10.0 }
+
+
+//c) Define a closure assigned to a constant called `wholeNumber` that takes a double and returns true if it is a whole number and pass it to `myFilter`.
+
+let wholeNumber = { (a: Double) -> Bool in a == floor(a)}
+
+
+//d) Define a closure assigned to a constant called `justEven` that takes a double and returns true if the number to the left of the point is even and pass it to `myFilter`.
+
+let justEven = { (a: Double) -> Bool in Int(a) % 2 == 0}
+
+
+//e) Use the built in filter method on `theDoubles` to recreate the answers for b, c and d.
+
+let biggerThanTenFilter = theDoubles.filter { (x: Double) -> Bool in  x >= 10 }
+
+let wholeNumberFilter = theDoubles.filter { (x: Double) -> Bool in x == floor(x)}
+
+let justEvenFilter = theDoubles.filter { (x: Double) -> Bool in Int(x) % 2 == 0}
+
+print(biggerThanTenFilter)
+print(wholeNumberFilter)
+print(justEvenFilter)
+
 ```
