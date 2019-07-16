@@ -394,7 +394,7 @@ return stringLetterNumber
 print(intsToStrings(theInts, closure: englishWords))
 ```
 
-## Question 12 NEED TO DO
+## Question 12 DONE
 
 let myArray = [34,42,42,1,3,4,3,2,49]
 
@@ -411,7 +411,21 @@ b) Sort `myArray` in descending order by defining the constant `descendingOrder`
 let mySecondSortedArray = myArray.sort(descendingOrder)
 let descendingOrder =
 ```
+Answer:
+```swift
+var myArray = [34,42,42,1,3,4,3,2,49]
 
+//a) Sort `myArray` in ascending order by defining the constant `ascendingOrder` below.
+
+let ascendingOrder:(Int, Int) -> Bool = {$0 < $1}
+let mySortedArray = myArray.sorted(by: ascendingOrder)
+print(mySortedArray)
+
+//b) Sort `myArray` in descending order by defining the constant `descendingOrder` below.
+
+let descendingOrder: (Int, Int) -> Bool = {$0 > $1}
+let mySecondSortedArray = myArray.sorted(by: descendingOrder)
+```
 
 ## Question 13 DONE
 
